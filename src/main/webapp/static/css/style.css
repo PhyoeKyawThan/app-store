@@ -1,0 +1,254 @@
+@charset "UTF-8";
+* {
+    width: 100%;
+    margin: auto;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+:root{
+    --primary-light: rgb(227, 221, 221);
+    --font-dark: rgb(62, 53, 53);
+    --header-size: 1.5em;
+    --secondary-white: rgba(175, 173, 173, 0.212);
+    --color-grey: rgb(143, 136, 136);
+    --background-grey: rgba(177, 169, 169, 0.523);
+}
+
+html,
+body {
+    height: 100%;
+    overflow: scroll;
+}
+.header{
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.header .logo{
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: cursive;
+    width: 22%;
+}
+.header .search{
+    width: 100%;
+    position: sticky;
+}
+
+.search input{
+    display: block;
+    width: 60%;
+    height: 30px;
+    margin-left: 0;
+}
+
+.search input{
+    padding: 1vh;
+    border: none;
+    background-color: var(--secondary-white);
+}
+
+.search .searched-list{
+    position: absolute;
+    width: 60%;
+    background-color: white;
+}
+
+.searched-list .searched-item{
+    display: flex;
+    height: 60px;
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(128, 128, 128, 0.212);
+}
+
+.searched-item .icon{
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.icon img{
+    width: 100%;
+    height: 100%;
+}
+
+.searched-item .name{
+    font-weight: bold;
+    color: var(--color-grey);
+}
+
+.searched-item:hover{
+    background-color: white;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.searched-item:hover .name{
+    color: var(--font-dark);
+}
+
+/* show searched */
+
+.header .user-option{
+    display: flex;
+    width: fit-content;
+}
+
+.user-option div{
+    margin: 5px 20px 5px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.user-option .contact{
+    color: rgb(51, 51, 95);
+}
+
+.contact:hover{
+    transition: 0.3 ease-out;
+    background-color: blue;
+    border-radius: 10px;
+    color: white;
+    transform: scale(1.1);
+}
+
+.user-option div i:hover{
+    transition: 0.3s ease-out;
+    color: rgb(134, 128, 128);
+    transform: scale(1.1);
+}
+
+
+/* header */
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .nav{
+    width: 20%;
+    height: 100%;
+    padding: 10px;
+    padding-top: 30px;
+}
+
+.nav .nav-header{
+    /* margin-left: -5px; */
+    font-weight: bold;
+    width: 80%;
+    color: var(--color-grey);
+}
+
+.nav .nav-item{
+    width: 80%;
+    padding: 1.5vh;
+    font-size: 0.9em;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-grey);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.nav-item .count{
+    width: fit-content;
+}
+
+.nav-item:hover{
+    background-color: var(--background-grey);
+    color: black;
+}
+/* nav */
+
+.display{
+    height: 100%;
+    overflow: scroll;
+}
+
+.display .items{
+    width: 90%;
+    max-height: 100%;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.item div{
+    padding: 0.5vh;
+}
+.items .item{
+    cursor: pointer;
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    background-color: rgba(128, 128, 128, 0.123);
+    border-radius: 10px;
+}
+
+.item .icon{
+    width: 80px;
+    height: 50px;
+} 
+
+.item .icon img{
+    width: 100%;
+    height: 100%;
+}
+
+.item .description{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.description .name{
+    font-weight: bold;
+}
+
+.description .system{
+    color: var(--color-grey)
+}
+
+.description .company{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.company .name{
+    font-size: 0.7em;
+    width: fit-content;
+    text-decoration: underline;
+}
+
+.company .date{
+    font-size: 0.6em;
+    font-weight: bold;
+    color: var(--color-grey);
+}
+
+@media screen and (max-width: 900px) {
+    .items .item{
+        width: 90%;
+    }
+}
+/* display */
+/* container */

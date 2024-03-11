@@ -1,0 +1,48 @@
+*{
+    margin:auto;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+.formAimg{
+    margin-top:3%;
+    display:flex;
+    align-content: center;
+    background-color: white;
+}
+.img{
+    margin-left: -20%;
+}
+h1{
+    font-weight: bold;
+
+}
+form{
+    margin-left:15%;
+    border-radius:10px;
+    min-width: 40%;
+    min-height:500px;
+   display:grid;
+    row-gap: 10%;
+    align-content: center;
+}
+form input{
+    border:none;
+    border-bottom: 1px solid black;
+}
+.button{
+    padding:5px 10px;
+    border-radius: 5px;
+    background-color: lightslategray;
+    border:1px solid lightslategray;
+}
+.agree{
+    margin-right:13%;
+}
+.already{
+    text-align: center;
+    margin-top:20%;
+}
+.button:hover{
+    transform:scale(1.05);
+    background-color:lightseagreen;
+}

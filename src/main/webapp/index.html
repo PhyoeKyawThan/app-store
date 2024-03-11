@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App-Store</title>
+    <script src="https://kit.fontawesome.com/04be286e27.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">App Store</div>
+        <div class="search">
+            <input type="search" name="search" placeholder="Search" id="search">
+            <div class="searched-list" id="searched-list">
+                
+                <!-- searched item -->
+            </div>
+        </div>
+        <div class="user-option">
+            <div class="contact">Contact</div>
+            <div class="user" title="User"><a href="./Profile"><i class="fa-solid fa-user"></i></a></div>
+            <div class="logout" title="Logout"><a href="./Logout"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="nav" id="nav">
+            <div class="nav-header">Menu</div>
+            <div class="nav-item" id="programs">
+                <div class="name">Programs</div>
+                <div class="count" id="program-count">0</div>
+            </div>
+            <div class="nav-item" id="social">
+                <div class="name">Social</div>
+                <div class="count" id="social-count">0</div>
+            </div>
+            <div class="nav-item" id="game">
+                <div class="name">Game</div>
+                <div class="count" id="game-count">0</div>
+            </div>
+            <div class="nav-item" id="development">
+                <div class="name">Development</div>
+                <div class="count" id="development-count">0</div>
+            </div>
+        </div>
+        <div class="display">
+            <div class="display-header"><h2>PROGRAMS</h2></div>
+            <div class="items" id="item-container">
+                
+                <!-- item -->
+            </div>
+            <!-- items -->
+        </div>
+    </div>
+    <script src="./static/js/index.js"></script>
+    <script src="./static/js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Detail</title>
+         <script src="https://kit.fontawesome.com/04be286e27.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="./static/css/app.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="logo">App Store</div>
+            <div class="search">
+                <input type="search" name="search" placeholder="Search"
+                    id="search">
+            </div>
+            <div class="contact"><div class="contact-btn">Contact</div></div>
+        </div>
+
+        <div class="div2">
+            <div class="descriptionbody">
+                <div class="description">
+                    <h2>Description</h2>
+                    <hr
+                        style="height:2px;border-width:0;color:gray;background-color:black">
+                    <br><br>
+                    <p id="description"></p>
+                </div>
+            </div>
+            <div class="featurebody">
+                <div class="feature">
+                    <h2>Features</h2>
+                    <hr style="height:2px;border-width:0;color:gray;background-color:black">
+                    <br>
+                    <p id="feature"></p><br>
+                </div>
+            </div>
+            <div class="systembody">
+                <div class="system">
+                    <h2>System Requirements</h2>
+                    <ul>
+                        <li id="system-require">&#9830;</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="app">
+            <div class="backbtn">
+                <a href="./"><i class="fa-solid fa-house"></i></a>
+            </div>
+            <div class="icon">
+                <img src="" alt="" id="icon">
+                <div class="name">
+                    <h2 id="app-name"></h2>
+                    <p>Meta</p>
+                </div>
+            </div>
+            <div class="button">
+                <form>
+                    <input type="submit" value="Install" name="install" id="download">
+                </form>
+            </div>
+        </div>
+        <script src="./static/js/search.js"></script>
+        <script>
+        	const parem = new URLSearchParams(document.location.search); 
+        	const APP_ID = Number(parem.get("app_id"));
+        	fetch("./GetById?app_id=" + APP_ID, {
+        		method: "GET"
+        	}).then( response => response.json() )
+        	.then( data => {
+        		document.getElementById("description").innerText = data.app.description;
+        		document.getElementById("feature").innerText = data.app.feature;
+        		document.getElementById("system-require").innerText += data.app.system_require;
+        		document.getElementById("app-name").innerText = data.app.app_name;
+        		document.getElementById("icon").src = "./icons/" + data.app.icon;
+        		document.getElementById("icon").setAttribute("alt", data.app.app_name);
+        		document.getElementById("download").addEventListener("click", (e)=>{
+        			e.preventDefault();
+        			window.location.href = data.app.download_link;
+        		})
+        	})
+        </script>
+    </body>
+</html>

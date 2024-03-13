@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 
 public class AppModel {
-	private Connection connect() throws ClassNotFoundException, SQLException {
+	protected Connection connect() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp", "domak", "domak");
 		return connect;

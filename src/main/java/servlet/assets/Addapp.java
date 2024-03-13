@@ -1,4 +1,4 @@
-
+package servlet.assets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,19 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class Addapp
  */
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/Addapp")
+public class Addapp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public Addapp() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,13 +27,10 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String session_name = request.getParameter("session-name");
-		HttpSession session = request.getSession();
-		session.removeAttribute(session_name);
-		if( session != null && session_name.equals("current-admin") ) {
-			response.sendRedirect("./admin");
-		}else{
-			response.sendRedirect("./index.html");
+		if( request.getSession().getAttribute("current-admin") == null ) {
+			request.getRequestDispatcher("/WEB-INF/admin/login.jsp").forward(request, response);
+		}else {
+			request.getRequestDispatcher("/WEB-INF/admin/add-app.jsp").forward(request, response);
 		}
 	}
 

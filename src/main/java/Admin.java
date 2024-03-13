@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class Admin
  */
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/Admin")
+public class Admin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public Admin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,14 +28,13 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String session_name = request.getParameter("session-name");
 		HttpSession session = request.getSession();
-		session.removeAttribute(session_name);
-		if( session != null && session_name.equals("current-admin") ) {
-			response.sendRedirect("./admin");
-		}else{
-			response.sendRedirect("./index.html");
+		if ( session.getAttribute("current-admin") == null ) {
+			request.getRequestDispatcher("/WEB-INF/admin/login.jsp").forward(request, response);
+		}else {
+			request.getRequestDispatcher("/WEB-INF/admin/index.html").forward(request, response);
 		}
+		
 	}
 
 	/**

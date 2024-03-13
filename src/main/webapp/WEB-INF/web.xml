@@ -4,4 +4,40 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+  <servlet>
+  	<servlet-name>Admin</servlet-name>
+  	<servlet-class>Admin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Admin</servlet-name>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>UploadFile</servlet-name>
+  	<servlet-class>servlet.assets.UploadFile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UploadFile</servlet-name>
+  	<url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+  	<servlet-name>Addapp</servlet-name>
+  	<servlet-class>servlet.assets.Addapp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Addapp</servlet-name>
+  	<url-pattern>/admin/addapp</url-pattern>
+  </servlet-mapping>
+  
+  
+    <servlet>
+  	<servlet-name>UploadAppByAdmin</servlet-name>
+  	<servlet-class>servlet.assets.UploadAppByAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UploadAppByAdmin</servlet-name>
+  	<url-pattern>/app_detail_upload</url-pattern>
+  </servlet-mapping>
 </web-app>

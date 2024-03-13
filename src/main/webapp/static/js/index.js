@@ -18,13 +18,15 @@ function allDatas(){
 	apps = datas.apps;
 	const social = apps.filter( app=> app.category === "social").length;
 	const game = apps.filter( app=> app.category === "game").length;
+	const development = apps.filter( app => app.category === "development").length;
 	document.getElementById("social-count").innerText = social;
 	document.getElementById("game-count").innerText = game;
+	document.getElementById("development-count").innerText = development;
     all_program_count.innerText = apps.length;
 	 apps.forEach( app => {
 		 item_container.innerHTML += `<div class="item" onclick="appDetail(${app.app_id})">
                     <div class="icon">
-                        <img src="./icons/${app.icon}" alt="" srcset="">
+                        <img src=".//icons/${app.icon}" alt="" srcset="">
                     </div>
                     <div class="description">
                         <div class="name">${app.app_name}</div>

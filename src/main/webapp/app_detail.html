@@ -74,7 +74,7 @@
         		document.getElementById("feature").innerText = data.app.feature;
         		document.getElementById("system-require").innerText += data.app.system_require;
         		document.getElementById("app-name").innerText = data.app.app_name;
-        		document.getElementById("icon").src = "./icons/" + data.app.icon;
+        		document.getElementById("icon").src = "http://127.0.0.1:9010/static/icons/" + data.app.icon;
         		document.getElementById("icon").setAttribute("alt", data.app.app_name);
         		document.getElementById("download").addEventListener("click", (e)=>{
         			e.preventDefault();

@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class AdminLogin
  */
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/AdminLogin")
+public class AdminLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public AdminLogin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,14 +28,7 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String session_name = request.getParameter("session-name");
-		HttpSession session = request.getSession();
-		session.removeAttribute(session_name);
-		if( session != null && session_name.equals("current-admin") ) {
-			response.sendRedirect("./admin");
-		}else{
-			response.sendRedirect("./index.html");
-		}
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -43,7 +36,15 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		if( username.equals("admin") && password.equals("admin") ) {
+			HttpSession session = request.getSession();
+			session.setAttribute("current-admin", true);
+			response.sendRedirect("./admin");
+		}else {
+			response.sendRedirect("./admin?error=true");
+		}
 	}
 
 }

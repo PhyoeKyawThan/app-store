@@ -8,6 +8,9 @@ import org.json.JSONObject;
 import Model.AppModel;
 
 public class Model extends AppModel {
+	
+//	get json data from the admin and insert into app table 
+// parems: app_data<JSONObject>
 	public boolean insertNewApp(JSONObject new_app) throws ClassNotFoundException, SQLException {
 		Connection connect = connect();
 		PreparedStatement query = connect.prepareStatement("insert into app("
@@ -38,6 +41,21 @@ public class Model extends AppModel {
 				+ new_app.getString("release_date") 
 				+ "')");
 		if( query.executeUpdate() > 0 ) {
+			query.close();
+			connect.close();
+			return true;
+		}
+		query.close();
+		connect.close();
+		return false;
+	}
+	
+//	delete app by id
+	
+	public boolean Delete(int app_id) throws SQLException, ClassNotFoundException {
+		Connection connect = connect();
+		PreparedStatement query = connect.prepareStatement("delete from app where app_id="+ app_id);
+		if( query.executeUpdate() > 0) {
 			query.close();
 			connect.close();
 			return true;

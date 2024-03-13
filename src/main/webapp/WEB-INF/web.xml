@@ -40,4 +40,13 @@
   	<servlet-name>UploadAppByAdmin</servlet-name>
   	<url-pattern>/app_detail_upload</url-pattern>
   </servlet-mapping>
+  
+      <servlet>
+  	<servlet-name>DeleteApp</servlet-name>
+  	<servlet-class>servlet.assets.DeleteApp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>DeleteApp</servlet-name>
+  	<url-pattern>/delete_app</url-pattern>
+  </servlet-mapping>
 </web-app>

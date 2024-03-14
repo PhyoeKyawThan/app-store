@@ -1,6 +1,7 @@
-package servlet.assets;
+package admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -12,19 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Model.AppModel;
 import admin.Model.Model;
 
 /**
- * Servlet implementation class DeleteApp
+ * Servlet implementation class GetAllUsers
  */
-@WebServlet("/DeleteApp")
-public class DeleteApp extends HttpServlet {
+@WebServlet("/GetAllUsers")
+public class GetAllUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteApp() {
+    public GetAllUsers() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,27 +36,21 @@ public class DeleteApp extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Model model = new Model();
-		JSONObject response_data = new JSONObject();
-//		get app_id
-		int app_id = Integer.parseInt(request.getParameter("app_id"));
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		JSONObject response_json = new JSONObject();
 		if( request.getSession().getAttribute("current-admin") != null ) {
+			Model model = new Model();
 			try {
-				boolean isDeleted = model.DeleteApp(app_id);
-				System.out.print(isDeleted);
-				if( isDeleted ) {
-					response.getWriter().print(new JSONObject().put("status", 200));
-				}else {
-				response.getWriter().print(new JSONObject().put("status", "404"));
-				}
-			} catch (ClassNotFoundException | JSONException | SQLException | IOException e) {
+				response_json.put("users", model.GetAllUsers());
+				out.print(response_json);
+			} catch (JSONException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else {
-			response_data.put("status", 401);
-			response_data.put("message", "Unauthorized - Login First");
-			response.getWriter().print(response_data);
+		response_json.put("status", 401);
+		out.print(response_json);
 		}
 	}
 

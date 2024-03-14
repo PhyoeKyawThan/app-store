@@ -78,6 +78,10 @@ body {
   border-radius: 10px;
 }
 
+.app div{
+	margin: 10px auto;
+}
+
 .app .icon img {
   margin: 50px 20px 40px 150px;
   justify-content: center;

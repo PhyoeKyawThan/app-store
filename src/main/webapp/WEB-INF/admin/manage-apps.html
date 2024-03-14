@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Management</title>
+    <script src="https://kit.fontawesome.com/04be286e27.js" crossorigin="anonymous"></script>
+    <style>
+        html, body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #f2f2f2;
+        }
+       .back button{
+            width: 3%;
+            height: auto;
+        }
+       .back button img{
+            width: 100%;
+            height: auto;
+        }
+        h2{
+            text-align: center;
+        }
+
+        .upload button{
+            padding: 15px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            width: 5%;;
+            text-align: center;
+        }
+
+        .container {
+            width: 100%;
+            padding: 20px;
+        }
+		tbody{
+			width: 100%;
+		}
+        tbody tr img{
+            width:30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+        	width: 10%;
+            padding: 8px;
+            text-align: left;
+            
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .upload-btn, .delete-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+        }
+        
+        #message{
+        	display: none;
+        	width: 90%;
+        	padding: 10px;
+        	background-color: rgba(0, 0, 0, 0.479);
+        	position: fixed;
+        	top: 0;
+        	margin: 10px auto;
+        	text-align: center;
+        	color: white;
+        	font-size: 2em;
+        }
+
+        @media only screen and (min-width: 600px) {
+            /* Add CSS for larger screens here if needed */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="back">
+    <a href="/app_store/admin"><button><i class="fa-solid fa-house"></i></button></a>
+     </div>
+    <h2>Admin Management</h2>
+    <div id="message">Edited</div>
+    <div class="upload">
+    <a href="/app_store/admin/addapp"><button type="submit">Upload</button></a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Developer</th>
+                <th>Release Date</th>
+                <th>Download URL</th>
+                <th>System require</th>
+      			<th>Features</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="app-container">
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+</div>
+<script>
+const app_container = document.getElementById("app-container");
+	fetch("/app_store/GetAllApps", {
+		method: "GET"
+	}).then( response => response.json() )
+	.then( datas => {
+		const message = document.getElementById("message");
+		const all_apps = datas.apps;
+		all_apps.forEach( app => {
+			// Create table row element
+			const app_row = document.createElement("tr");
+
+			// Create and configure img element
+			const img = document.createElement("img");
+			img.src = "/app_store/icons/" + app.icon;
+			img.alt = "Image";
+			img.setAttribute("contenteditable", "true"); // Making image editable
+
+			// Create and configure td elements for app information
+			const app_name = document.createElement("td");
+			app_name.setAttribute("contenteditable", "true"); // Making app name editable
+			app_name.textContent = app.app_name;
+
+			const developer_name = document.createElement("td");
+			developer_name.setAttribute("contenteditable", "true"); // Making developer name editable
+			developer_name.textContent = app.developer_name;
+
+			const release_date = document.createElement("td");
+			release_date.setAttribute("contenteditable", "true"); // Making release date editable
+			release_date.textContent = app.release_date;
+			
+			const download_link = document.createElement("td");
+			download_link.setAttribute("contenteditable", "true"); // Making release date editable
+			download_link.textContent = app.download_link;
+
+			const system_require = document.createElement("td");
+			system_require.setAttribute("contenteditable", "true"); // Making release date editable
+			system_require.textContent = app.system_require;
+			
+			const features = document.createElement("td");
+			features.setAttribute("contenteditable", "true"); // Making release date editable
+			features.textContent = app.features;
+			// Create and configure option cell
+			const tdOption = document.createElement("td");
+
+			// Create and configure Edit button
+			const editButton = document.createElement("button");
+			editButton.className = "upload-btn";
+			editButton.innerText = "Edit";
+
+			// Create and configure Delete button
+			const deleteButton = document.createElement("button");
+			deleteButton.className = "delete-btn";
+			deleteButton.innerText = "Delete";
+
+			// Append Edit and Delete buttons to option cell
+			tdOption.appendChild(editButton);
+			tdOption.appendChild(deleteButton);
+
+			// Append img and td elements to table row
+			app_row.appendChild(img);
+			app_row.appendChild(app_name);
+			app_row.appendChild(developer_name);
+			app_row.appendChild(release_date);
+			app_row.appendChild(download_link);
+			app_row.appendChild(system_require);
+			app_row.appendChild(features);
+
+			// Append option cell to table row
+			app_row.appendChild(tdOption);
+
+			// Now, you can append the table row to your table in the DOM
+			// Assuming `app_table` is the reference to your table element
+
+			editButton.addEventListener("click", ()=>{
+				const edit_data = JSON.stringify({
+					app_id: app.app_id,
+					app_name: app_name.innerText,
+					release_date: release_date.innerText,
+					download_link: download_link.innerText,
+					system_require: system_require.innerText,
+					features: features.innerText
+				});
+				fetch("/app_store/update?update-data=" + encodeURIComponent(edit_data), {
+                    method: "POST"
+                }).then(response => response.json())
+                    .then(data => {
+                        const message = document.getElementById("message");
+                        if (data.status === 200) {
+                        	message.style.display = "block";
+                            setTimeout(()=>{
+                            	message.style.display = "none";
+                            }, 3000);
+                        } else {
+                        	message.innerText = "Fail to Update";
+                        	message.style.display = "block";
+                        }
+                    }).catch( error => console.error(error))
+			})
+			deleteButton.addEventListener("click", ()=>{
+				fetch("/app_store/delete_app?app_id=" + app.app_id, { method: "GET"})
+				.then( response => response.json() )
+				.then( response_msg => {
+					if( response_msg.status === 200 ){
+						app_row.style.display = "none";
+					}else{
+						alert("Something wrong")
+					}
+				}).catch( error => console.error( error ));
+			})
+			app_container.appendChild(app_row);
+	})
+}).catch(error => console.error(error))
+</script>
+</body>
+</html>

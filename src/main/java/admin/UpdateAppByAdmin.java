@@ -1,4 +1,4 @@
-package servlet.assets;
+package admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,22 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import admin.Model.Model;
 
 /**
- * Servlet implementation class UploadAppByAdmin
+ * Servlet implementation class UpdateAppByAdmin
  */
-@WebServlet("/UploadAppByAdmin")
-public class UploadAppByAdmin extends HttpServlet {
+@WebServlet("/UpdateAppByAdmin")
+public class UpdateAppByAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UploadAppByAdmin() {
+    public UpdateAppByAdmin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,26 +35,23 @@ public class UploadAppByAdmin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		JSONObject new_app = new JSONObject(request.getParameter("new-app"));
 		HttpSession session = request.getSession();
-		PrintWriter out = response.getWriter();
-		Model upload = new Model();
+		JSONObject update_data = new JSONObject(request.getParameter("update-data"));
 		JSONObject response_data = new JSONObject();
-		if( session.getAttribute("current-admin") == null ) {
-			response_data.put("status", 401);
-			response_data.put("message", "Unauthorized - Login First");
-			out.print(response_data);
-		}else {
+		if( session.getAttribute("current-admin") != null ) {
+			Model model = new Model();
 			try {
-				if( upload.insertNewApp(new_app) ) {
+				PrintWriter out = response.getWriter();
+				boolean isUpdated = model.UpdateApp(update_data);
+				if( isUpdated ) {
 					response_data.put("status", 200);
-					System.out.println(response_data);
 					out.print(response_data);
 				}else {
-					response_data.put("status", 500);
+					response_data.put("status", 400);
 					out.print(response_data);
 				}
-			} catch (ClassNotFoundException | JSONException | SQLException e) {
+				
+			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

@@ -6,24 +6,24 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sign up here</title>
+        <script src="https://kit.fontawesome.com/04be286e27.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="./static/css/signup.css">
 	<%@ page import="javax.servlet.http.HttpSession" %>
 	
     </head>
 
     <body>
-    	<% 
-        if ( session != null && session.getAttribute("current-user") != null) { 
-    %>
-        <script>
-            window.location.href = "./index.html"; // Redirect if user is already logged in
-        </script>
-    <% } %>
+    <% String fail = request.getParameter("fail"); %>
+     <div style="width: 100%; padding: 20px; position: absolute;">
+        <a href="./"><i class="fa-solid fa-circle-arrow-left" style="font-size: 2em"></i></a>
+    </div>
+    	<h1> </h1>
         <div class="formAimg">
-            <form method="post" onsubmit="validateAndSend(event)">
+            <form action="./sign_up" method="post" onsubmit="validateAndSend(event)">
                 <h1>Sign Up</h1>
+                <div><h1 style="color:red;"><%=  fail == null ? "": fail %></h1></div>
                 <div>
-                    <input type="text" id="name" name="name" placeholder="Your Name">
+                    <input type="text" id="name" name="user_name" placeholder="Your Name">
                 </div>
                 <div>
 
@@ -35,6 +35,7 @@
                 <div>
                     <input type="password" id="rpassword" name="rpassword" placeholder="Repeat Your Password">
                 </div>
+                    <input type="hidden" name="profile" value="default_profile.png">
                 <div class="agree">
                     <input type="checkbox" id="agree">
                     <label for="agree">I agree all statements in <a href="">Terms and service</a></label>
@@ -45,12 +46,12 @@
             </form>
             <div class="img">
                 <img src="./static/images/signup.jpg" width="100%" alt="signup" height="100%">
-                <div class="already"><a href="">I am already member</a></div>
+                <div class="already"><a href="./login.jsp">I am already member</a></div>
             </div>
         </div>
         <script>
             function validateAndSend(){
-                event.preventDefault();
+                
                 if( document.getElementById("agree").checked === true ){
                     return true;
                 }

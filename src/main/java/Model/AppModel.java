@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
-
+/* this is a Model for getting data from the database by requirements 
+ * 
+ * */
 public class AppModel {
 	protected Connection connect() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -33,8 +35,9 @@ public class AppModel {
 			app.put("download_link", data.getString("download_link"));
 			app.put("description", data.getString("description"));
 			app.put("features", data.getString("features"));
-			app.put("system_requirie", data.getString("system_require"));
+			app.put("system_require", data.getString("system_require"));
 			app.put("release_date", data.getString("release_date"));
+			app.put("repo", data.getString("repo"));
 			
 			apps.add(app);
 		}
@@ -59,6 +62,7 @@ public class AppModel {
 			app.put("features", data.getString("features"));
 			app.put("system_require", data.getString("system_require"));
 			app.put("release_date", data.getString("release_date"));
+			app.put("repo", data.getString("repo"));
 		}
 		return app;
 	}

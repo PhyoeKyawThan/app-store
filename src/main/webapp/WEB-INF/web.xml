@@ -13,6 +13,24 @@
     <url-pattern>/admin</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+  	<servlet-name>AdminManage</servlet-name>
+  	<servlet-class>AdminManage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminManage</servlet-name>
+    <url-pattern>/admin/manage_apps</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>AdminManageUsers</servlet-name>
+  	<servlet-class>AdminManageUsers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminManageUsers</servlet-name>
+    <url-pattern>/admin/manage_users</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
   	<servlet-name>UploadFile</servlet-name>
   	<servlet-class>servlet.assets.UploadFile</servlet-class>
@@ -34,11 +52,38 @@
   
     <servlet>
   	<servlet-name>UploadAppByAdmin</servlet-name>
-  	<servlet-class>servlet.assets.UploadAppByAdmin</servlet-class>
+  	<servlet-class>admin.UploadAppByAdmin</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>UploadAppByAdmin</servlet-name>
   	<url-pattern>/app_detail_upload</url-pattern>
+  </servlet-mapping>
+  
+      <servlet>
+  	<servlet-name>UpdateAppByAdmin</servlet-name>
+  	<servlet-class>admin.UpdateAppByAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UpdateAppByAdmin</servlet-name>
+  	<url-pattern>/update</url-pattern>
+  </servlet-mapping>
+  
+        <servlet>
+  	<servlet-name>UpdateUserByAdmin</servlet-name>
+  	<servlet-class>admin.UpdateUserByAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UpdateUserByAdmin</servlet-name>
+  	<url-pattern>/update_user</url-pattern>
+  </servlet-mapping>
+  
+        <servlet>
+  	<servlet-name>GetAllUsers</servlet-name>
+  	<servlet-class>admin.GetAllUsers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>GetAllUsers</servlet-name>
+  	<url-pattern>/get_users</url-pattern>
   </servlet-mapping>
   
       <servlet>
@@ -48,5 +93,42 @@
   <servlet-mapping>
   	<servlet-name>DeleteApp</servlet-name>
   	<url-pattern>/delete_app</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>DeleteUser</servlet-name>
+  	<servlet-class>servlet.assets.DeleteUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>DeleteUser</servlet-name>
+  	<url-pattern>/delete_user</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>Profile</servlet-name>
+  	<servlet-class>view.Profile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Profile</servlet-name>
+  	<url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+  	<servlet-name>UploadAppByUser</servlet-name>
+  	<servlet-class>User.UploadAppByUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UploadAppByUser</servlet-name>
+  	<url-pattern>/user_app_upload</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>Signup</servlet-name>
+  	<servlet-class>User.Signup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Signup</servlet-name>
+  	<url-pattern>/sign_up</url-pattern>
   </servlet-mapping>
 </web-app>

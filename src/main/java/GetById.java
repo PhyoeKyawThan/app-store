@@ -17,6 +17,7 @@ import Model.AppModel;
 
 /**
  * Servlet implementation class GetById
+ * endpoint under app_store/ dir and 
  */
 @WebServlet("/GetById")
 public class GetById extends HttpServlet {

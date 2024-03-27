@@ -89,7 +89,7 @@
     </head>
 
     <body>
-    <div id="back"><a href="../admin">HOME</a> | <a href="../admin/manage">MANAGE</a></div>
+    <div id="back"><a href="../admin">HOME</a> | <a href="../admin/manage_apps">MANAGE</a></div>
         <div class="container">
         
             <form>

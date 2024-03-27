@@ -13,7 +13,6 @@
     <script src="https://kit.fontawesome.com/04be286e27.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./static/css/userprofile.css">
     <style>
-
     	  
     body {
       font-family: Arial, sans-serif;
@@ -110,7 +109,7 @@
     }
   
   </style>
-    </style>
+   
 </head>
 <body>
 
@@ -127,7 +126,10 @@
 	ArrayList<JSONObject> user_uploaded_apps = model.GetUserUploadedApps(current_user.getInt("user_id"));
 %>
 
-<div class="container edit-container" id="edit-container">
+<div class="edit-container" id="edit-container">
+	<div class="back" id="close-edit-form">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+    </div>
     <h1>User Profile Edit</h1>
     <div class="user-info">
       <div class="user-photo">
@@ -136,8 +138,8 @@
       </div>
       <div class="user-details">
         <div class="name-section">
-          <input type="text" id="nameInput" placeholder="Enter your name" value="<%= username %>"/>
-          <button class="edit-btn" onclick="update">Update</button>
+          <input type="text" id="username" placeholder="Enter your name" value="<%= username %>"/>
+          <button class="edit-btn" id="update-user-info">Update</button>
         </div>
       </div>
     </div>
@@ -191,7 +193,7 @@
             <a href="./profile"><i class="fa-solid fa-circle-arrow-left"></i></a>
         </div>
         <div class="containerr">
-            <form action="./upload_app_by_user" method="post">
+            <form method="post" id="upload-form">
             <div class="form-group">
                     <h3 id="message" style="margin: 10px auto; width: fit-content"></h3>
                   </div>
@@ -252,7 +254,16 @@
       var name = document.getElementById('nameInput').value;
       document.getElementById('displayName').textContent = name;
     }
+    
+    document.getElementById("edit").addEventListener("click", ()=>{
+    	document.getElementById("edit-container").style.display = "block";
+    })
+    
+    document.getElementById("close-edit-form").addEventListener("click", ()=>{
+    	document.getElementById("edit-container").style.display = "none";
+    })
  </script>
     <script src="./static/js/uploadform.js"></script>
+    <script src="./static/js/update_user.js"></script>
 </body>
 </html>

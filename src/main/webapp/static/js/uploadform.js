@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });            
     document.getElementById('upload-app').addEventListener('click', function() {
+		document.getElementById("upload-app").disabled = true;
       var valid = true;
       var feedbackMessage = '';
 
@@ -119,18 +120,16 @@ if(!valid){
                                     if (data.status === 200) {
 										message.style.color = "green";
                                         message.innerText = "Uploaded";
+                                        document.getElementById("upload-app").disabled = false;
+                                        document.getElementById("upload-form").reset();
                                     } else {
 										message.style.color = "red";
                                         message.innerText = "Fail";
                                     }
                                 }).catch( error => console.error(error));
                             }
-                        }).catch(error => console.error("Error: " + erro))
-
+                        }).catch(error => console.error("Error: " + error));
       }
-      
-
-      return valid;
     });
 
   });

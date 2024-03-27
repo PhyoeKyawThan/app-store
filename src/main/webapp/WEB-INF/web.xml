@@ -131,4 +131,13 @@
   	<servlet-name>Signup</servlet-name>
   	<url-pattern>/sign_up</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>UpdateUserDetail</servlet-name>
+  	<servlet-class>User.UpdateUserDetail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UpdateUserDetail</servlet-name>
+  	<url-pattern>/update_user_detail</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -32,7 +32,7 @@ function allDatas(){
                         <div class="name">${app.app_name}</div>
                         <div class="system">${app.category}</div>
                         <div class="company">
-                            <div class="name">com.${app.app_name}</div>
+                            <div class="name">com.${(app.app_name).toLowerCase()}</div>
                             <div class="date">${app.release_date}</div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@ function allDatas(){
                         <div class="name">${app.app_name}</div>
                         <div class="system">${app.category}</div>
                         <div class="company">
-                            <div class="name">com.${app.app_name}</div>
+                            <div class="name">com.${app.app_name.toLowerCase()}</div>
                             <div class="date">${app.release_date}</div>
                         </div>
                     </div>

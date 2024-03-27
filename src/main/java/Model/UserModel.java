@@ -58,7 +58,7 @@ public class UserModel extends AppModel{
 				+ "',profile='"
 				+ update_data.getString("profile")
 				+ "'";
-		PreparedStatement query = connect.prepareStatement("update user set " + data_string + " where user_id="+update_data.getInt("app_id"));
+		PreparedStatement query = connect.prepareStatement("update user set " + data_string + " where user_id="+update_data.getInt("user_id"));
 		if( query.executeUpdate() > 0 ) {
 			query.close();
 			connect.close();
@@ -162,11 +162,10 @@ public class UserModel extends AppModel{
 		ResultSet data = query.executeQuery();
 		JSONObject user = new JSONObject();
 		while( data.next() ) {
-			user.put("app_id", data.getInt("user_id"));
-			user.put("app_name", data.getString("user_name"));
-			user.put("icon", data.getString("profile"));
-			user.put("category", data.getString("email"));
-			user.put("developer_id", data.getInt("developer_id"));
+			user.put("user_id", data.getInt("user_id"));
+			user.put("user_name", data.getString("user_name"));
+			user.put("profile", data.getString("profile"));
+			user.put("email", data.getString("email"));
 		}
 		
 		return user;

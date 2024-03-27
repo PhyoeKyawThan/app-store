@@ -68,6 +68,29 @@ public class UserModel extends AppModel{
 		connect.close();
 		return false;
 	}
+	
+	//comment
+	public boolean InsertNewComment(JSONObject comment) throws ClassNotFoundException, SQLException {
+		Connection connect = connect();
+		PreparedStatement query = connect.prepareStatement("insert into comment("
+				+ "user_id,"
+				+ "app_id,"
+				+ "text) values('"
+				+ comment.getInt("user_id") 
+				+ "',"
+				+ comment.getInt("app_id")
+				+ ",'"
+				+ comment.getString("text")  
+				+ "')");
+		if( query.executeUpdate() > 0 ) {
+			query.close();
+			connect.close();
+			return true;
+		}
+		query.close();
+		connect.close();
+		return false;
+	}
 //	 upload app by user
 	public boolean UploadApp(JSONObject new_app) throws ClassNotFoundException, SQLException {
 		Connection connect = connect();
@@ -127,6 +150,8 @@ public class UserModel extends AppModel{
 			user.put("profile", result.getString("profile"));
 			user.put("email", result.getString("email"));
 		}
+		checkExist.close();
+		connect.close();
 		return user;
 	}
 	
@@ -151,7 +176,8 @@ public class UserModel extends AppModel{
 			
 			apps.add(app);
 		}
-		
+		query.close();
+		connect.close();
 		return apps;
 	}
 	
@@ -167,7 +193,28 @@ public class UserModel extends AppModel{
 			user.put("profile", data.getString("profile"));
 			user.put("email", data.getString("email"));
 		}
-		
+		query.close();
+		connect.close();
 		return user;
+	}
+	
+	public ArrayList<JSONObject> GetAllComment(int app_id) throws ClassNotFoundException, SQLException{
+		ArrayList<JSONObject> comments = new ArrayList<JSONObject>();
+		Connection connect = connect();
+		PreparedStatement query = connect.prepareStatement(" select comment.comment_id, user.user_id, user.user_name, user.profile, comment.text from app, user, comment where app.app_id=? and comment.user_id=user.user_id and comment.app_id=app.app_id ORDER BY comment_id DESC");
+		query.setInt(1, app_id);
+		ResultSet data = query.executeQuery();
+		while( data.next() ) {
+			JSONObject comment = new JSONObject();
+			comment.put("comment_id", data.getInt("comment_id"));
+			comment.put("user_id", data.getInt("user_id"));
+			comment.put("user_name", data.getString("user_name"));
+			comment.put("profile", data.getString("profile"));
+			comment.put("text", data.getString("text"));
+			comments.add(comment);
+		}
+		query.close();
+		connect.close();
+		return comments;
 	}
 }

@@ -26,7 +26,7 @@ document.getElementById("update-user-info").addEventListener("click", ()=>{
                                     if (data.status === 200) {
 										window.location.href = "./profile";
                                     } else {
-										alert("Fail");
+										window.location.href = "./logout?session-name=current-user";
                                     }
                                 }).catch( error => console.error(error));
 						}

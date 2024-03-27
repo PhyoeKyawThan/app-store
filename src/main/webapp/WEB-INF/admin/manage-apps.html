@@ -90,7 +90,13 @@
         	color: white;
         	font-size: 2em;
         }
-
+	.feature{
+		display: block;
+		width: 200px;
+		font-size: 0.7em;
+		overflow: scroll;
+		height: 100px;
+	}
         @media only screen and (min-width: 600px) {
             /* Add CSS for larger screens here if needed */
         }
@@ -168,6 +174,7 @@ const app_container = document.getElementById("app-container");
 			const features = document.createElement("td");
 			features.setAttribute("contenteditable", "true"); // Making release date editable
 			features.textContent = app.features;
+			features.className = "feature";
 			// Create and configure option cell
 			const tdOption = document.createElement("td");
 

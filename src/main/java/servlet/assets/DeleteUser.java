@@ -37,10 +37,10 @@ public class DeleteUser extends HttpServlet {
 		Model model = new Model();
 		JSONObject response_data = new JSONObject();
 //		get app_id
-		int app_id = Integer.parseInt(request.getParameter("user_id"));
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		if( request.getSession().getAttribute("current-admin") != null ) {
 			try {
-				boolean isDeleted = model.DeleteUser(app_id);
+				boolean isDeleted = model.DeleteUser(user_id);
 				System.out.print(isDeleted);
 				if( isDeleted ) {
 					response.getWriter().print(new JSONObject().put("status", 200));

@@ -1,89 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Detail</title>
-         <script src="https://kit.fontawesome.com/04be286e27.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="./static/css/app.css">
-    </head>
-    <body>
-        <div class="header">
-            <div class="logo">App Store</div>
-            <div class="search">
-                <input type="search" name="search" placeholder="Search"
-                    id="search">
-            </div>
-            <div class="contact"><div class="contact-btn">Contact</div></div>
-        </div>
 
-        <div class="div2">
-            <div class="descriptionbody">
-                <div class="description">
-                    <h2>Description</h2>
-                    <hr
-                        style="height:2px;border-width:0;color:gray;background-color:black">
-                    <br><br>
-                    <p id="description"></p>
-                </div>
-            </div>
-            <div class="featurebody">
-                <div class="feature">
-                    <h2>Features</h2>
-                    <hr style="height:2px;border-width:0;color:gray;background-color:black">
-                    <br>
-                    <p id="feature"></p><br>
-                </div>
-            </div>
-            <div class="systembody">
-                <div class="system">
-                    <h2>System Requirements</h2>
-                    <ul>
-                        <li id="system-require">&#9830;</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+    <script src="https://kit.fontawesome.com/04be286e27.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./static/css/app.css">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
 
-        <div class="app">
-            <div class="backbtn">
-                <a href="./"><i class="fa-solid fa-house"></i></a>
-            </div>
-            <div class="icon">
-                <img src="" alt="" id="icon">
-                <div class="name">
-                    <h2 id="app-name"></h2>
-                    <p>Meta</p>
-                </div>
-            </div>
-            <div style="text-align: center;">Project repo<a href="" id="repo" style="display: block"></a></div>
-            <div class="button">
-                <form>
-                    <input type="submit" value="Install" name="install" id="download">
-                </form>
+<body>
+    <div class="header">
+        <div class="logo">App Store</div>
+        <div class="search">
+            <input type="search" name="search" placeholder="Search" id="search">
+            <div class="searched-list" id="searched-list">
+
+                <!-- searched item -->
             </div>
         </div>
-        <script src="./static/js/search.js"></script>
-        <script>
-        	const parem = new URLSearchParams(document.location.search); 
-        	const APP_ID = Number(parem.get("app_id"));
-        	fetch("./GetById?app_id=" + APP_ID, {
-        		method: "GET"
-        	}).then( response => response.json() )
-        	.then( data => {
-        		document.getElementById("description").innerText = data.app.description;
-        		document.getElementById("feature").innerText = data.app.features;
-        		document.getElementById("system-require").innerText += data.app.system_require;
-        		document.getElementById("app-name").innerText = data.app.app_name;
-        		document.getElementById("icon").src = "./icons/" + data.app.icon;
-        		document.getElementById("icon").setAttribute("alt", data.app.app_name);
-        		document.getElementById("repo").innerText = data.app.repo === undefined ? "Unavailable": data.app.repo;
-        		document.getElementById("repo").href = data.app.repo === undefined ? "": data.app.repo;
-        		document.getElementById("download").addEventListener("click", (e)=>{
-        			e.preventDefault();
-        			window.location.href = data.app.download_link;
-        		})
+        <div class="contact">
+            <div class="contact-btn">Contact</div>
+        </div>
+    </div>
+
+    <div class="div2">
+        <div class="descriptionbody">
+            <div class="description">
+                <h2>Description</h2>
+                <hr style="height:2px;border-width:0;color:gray;background-color:black">
+                <br><br>
+                <p id="description"></p>
+            </div>
+        </div>
+        <div class="featurebody">
+            <div class="feature">
+                <h2>Features</h2>
+                <hr style="height:2px;border-width:0;color:gray;background-color:black">
+                <br>
+                <p id="feature"></p><br>
+            </div>
+        </div>
+        <div class="systembody">
+            <div class="system">
+                <h2>System Requirements</h2>
+                <ul>
+                    <li id="system-require">&#9830;</li>
+                </ul>
+            </div>
+        </div>
+        <div class="comments" style="margin: 10px auto;">
+            <h2>Comments</h2>
+            <div class="comment-input">
+                <textarea type="text" name="comment" placeholder="Comments (characters must me greater than five)..." id="comment-text"></textarea>
+                <div class="comment-submit">
+                    <i class="fa-solid fa-paper-plane" id="comment-submit"></i>
+                </div>
+            </div>
+
+            <div class="comment-section" id="comment-section">
+               
+<!-- comment will be here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="app">
+        <div class="backbtn">
+            <a href="./"><i class="fa-solid fa-house"></i></a>
+        </div>
+        <div class="icon">
+            <img src="" alt="" id="icon">
+            <div class="name">
+                <h2 id="app-name"></h2>
+                <p>Meta</p>
+            </div>
+        </div>
+        <div style="text-align: center;">Project repo<a href="" id="repo" style="display: block"></a></div>
+        <div class="button">
+            <form>
+                <input type="submit" value="Install" name="install" id="download">
+            </form>
+        </div>
+    </div>
+    <script>
+        const parem = new URLSearchParams(document.location.search);
+        const APP_ID = Number(parem.get("app_id"));
+        fetch("./GetById?app_id=" + APP_ID, {
+            method: "GET"
+        }).then(response => response.json())
+            .then(data => {
+                document.getElementById("description").innerText = data.app.description;
+                document.getElementById("feature").innerText = data.app.features;
+                document.getElementById("system-require").innerText += data.app.system_require;
+                document.getElementById("app-name").innerText = data.app.app_name;
+                document.getElementById("icon").src = "./icons/" + data.app.icon;
+                document.getElementById("icon").setAttribute("alt", data.app.app_name);
+                document.getElementById("repo").innerText = data.app.repo === undefined ? "Unavailable" : data.app.repo;
+                document.getElementById("repo").href = data.app.repo === undefined ? "" : data.app.repo;
+                document.getElementById("download").addEventListener("click", (e) => {
+                    e.preventDefault();
+                    window.location.href = data.app.download_link;
+                })
+            })
+
+        //search
+        function appDetail(app_id) {
+            window.location.href = "./app_detail.html?app_id=" + app_id;
+        }
+        let apps;
+        fetch("./GetAllApps", {
+            method: "GET"
+        }).then(response => response.json())
+            .then(datas => {
+                apps = datas.apps;
+                console.log(datas);
+            }).catch(error => console.error(error));
+        const search = document.getElementById("search");
+        const search_list = document.getElementById("searched-list");
+        search.addEventListener("input", () => {
+            const filtered_arry = apps.filter(app => app.app_name.toLowerCase().includes(search.value.toLowerCase()));
+            while (search_list.hasChildNodes()) {
+                search_list.removeChild(search_list.firstChild);
+            }
+            filtered_arry.forEach(app => {
+                search_list.innerHTML += `<div class="searched-item" onclick="appDetail(${app.app_id})">
+        <div class="icon">
+            <img src="./icons/${app.icon}" alt="">
+        </div>
+        <div class="name">${app.app_name}</div>
+    </div>`;
+            })
+            if (search.value === "") {
+                while (search_list.hasChildNodes()) {
+                    search_list.removeChild(search_list.firstChild);
+                }
+            }
+        })
+	//comments section
+		const comment_section = document.getElementById("comment-section");
+        fetch("/app_store/GetAllComment?app_id="+APP_ID, {
+        	method: "GET"
+        }).then( response => response.json() )
+        .then( data => {
+        	data.comments.forEach( comment => {
+        		comment_section.innerHTML += `<div class="comment-item">
+                    <div class="user">
+                        <div class="profile"><img src="./icons/${comment.profile}" alt="" srcset=""></div>
+                        <div class="username">${comment.user_name}</div>
+                    </div>
+
+                    <div class="text">${comment.text}</div>
+                </div>`;
         	})
-        </script>
-    </body>
+        })
+        //comment
+        const comment = document.getElementById("comment-submit");
+        comment.addEventListener("click", (e)=>{
+            const text = document.getElementById("comment-text");
+            if( text.value.length > 5 ){
+                const comment_data = JSON.stringify({
+                    app_id: APP_ID,
+                    text: text.value
+                });
+    
+                fetch("/app_store/Comment?comment=" + encodeURIComponent(comment_data), {
+                    method: "POST"
+                }).then(response => response.json())
+                    .then(data => {
+                        if( data.status === 200 ){
+                        	window.location.href = "./app_detail.html?app_id="+APP_ID;
+                        }else{
+                        	window.location.href = "./login.jsp";
+                        }
+                    }).catch( error => console.error(error));
+            }
+        })
+    </script>
+</body>
+
 </html>

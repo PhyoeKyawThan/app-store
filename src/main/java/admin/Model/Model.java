@@ -126,7 +126,38 @@ public class Model extends AppModel {
 		connect.close();
 		return false;
 	}
-	
+//	reterive contects datas 
+	public ArrayList<JSONObject> GetContects() throws SQLException, ClassNotFoundException{
+		ArrayList<JSONObject> contects = new ArrayList<JSONObject>();
+		Connection connect = connect();
+		PreparedStatement query = connect.prepareStatement("select * from contects ORDER BY user_id DESC");
+		ResultSet data = query.executeQuery();
+		while( data.next() ) {
+			JSONObject contect = new JSONObject();
+			contect.put("contect_id", data.getInt("contect_id"));
+			contect.put("user_id", data.getInt("user_id"));
+			contect.put("user_name", data.getString("user_name"));
+			contect.put("email", data.getString("email"));
+			contect.put("message", data.getString("message"));
+			
+			contects.add(contect);
+		}
+		
+		return contects;
+	}
+//	delete contect 
+	public boolean DeleteContect(int contect_id) throws SQLException, ClassNotFoundException {
+		Connection connect = connect();
+		PreparedStatement query = connect.prepareStatement("delete from contects where contect_id="+ contect_id);
+		if( query.executeUpdate() > 0) {
+			query.close();
+			connect.close();
+			return true;
+		}
+		query.close();
+		connect.close();
+		return false;
+	}
 //	reterive users
 	public ArrayList<JSONObject> GetAllUsers() throws SQLException, ClassNotFoundException{
 		ArrayList<JSONObject> users = new ArrayList<JSONObject>();

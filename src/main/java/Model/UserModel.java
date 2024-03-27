@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserModel extends AppModel{
@@ -82,6 +83,46 @@ public class UserModel extends AppModel{
 				+ ",'"
 				+ comment.getString("text")  
 				+ "')");
+		if( query.executeUpdate() > 0 ) {
+			query.close();
+			connect.close();
+			return true;
+		}
+		query.close();
+		connect.close();
+		return false;
+	}
+	// contect upload to contact table
+	public boolean UploadContect(JSONObject contect) throws JSONException, SQLException, ClassNotFoundException {
+		Connection connect = connect();
+		PreparedStatement query = connect.prepareStatement("insert into contects("
+				+ "email,"
+				+ "message,"
+				+ " user_name) "
+				+ "values('"
+				+ contect.getString("email")
+				+ "','"
+				+ contect.getString("message") 
+				+ "','"
+				+ contect.getString("user_name")
+				+ "')");
+		System.out.println(contect.getInt("user_id"));
+		if( contect.getInt("user_id") > 0 ) {
+			query = connect.prepareStatement("insert into contects("
+					+ "user_id,"
+					+ "email,"
+					+ "message,"
+					+ " user_name) "
+					+ "values("
+					+ contect.getInt("user_id")
+					+ ",'"
+					+ contect.getString("email")
+					+ "','"
+					+ contect.getString("message") 
+					+ "','"
+					+ contect.getString("user_name")
+					+ "')");
+		}
 		if( query.executeUpdate() > 0 ) {
 			query.close();
 			connect.close();

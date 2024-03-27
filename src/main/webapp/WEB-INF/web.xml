@@ -22,6 +22,15 @@
     <url-pattern>/admin/manage_apps</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>UserContects</servlet-name>
+  	<servlet-class>UserContects</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UserContects</servlet-name>
+    <url-pattern>/admin/user_contects</url-pattern>
+  </servlet-mapping>
+  
    <servlet>
   	<servlet-name>AdminManageUsers</servlet-name>
   	<servlet-class>AdminManageUsers</servlet-class>
@@ -139,5 +148,14 @@
   <servlet-mapping>
   	<servlet-name>UpdateUserDetail</servlet-name>
   	<url-pattern>/update_user_detail</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>ContectUs</servlet-name>
+  	<servlet-class>User.ContectUs</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ContectUs</servlet-name>
+  	<url-pattern>/contect_us</url-pattern>
   </servlet-mapping>
 </web-app>

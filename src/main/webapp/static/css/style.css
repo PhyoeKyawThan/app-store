@@ -112,7 +112,7 @@ body {
 
 .contact:hover{
     transition: 0.3 ease-out;
-    background-color: blue;
+    background-color: var(--secondary-white);
     border-radius: 10px;
     color: white;
     transform: scale(1.1);
